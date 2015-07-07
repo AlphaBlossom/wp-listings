@@ -13,7 +13,10 @@ function wp_listings_template_include( $template ) {
 	$post_type = 'listing';
 
     if ( wp_listings_is_taxonomy_of($post_type) ) {
-        if ( file_exists(get_stylesheet_directory() . '/archive-' . $post_type . '.php' ) ) {
+    	if ( file_exists(get_stylesheet_directory() . '/taxonomy-' . $post_type . '.php' ) ) {
+    	    return get_stylesheet_directory() . '/taxonomy-' . $post_type . '.php';
+    	}
+        elseif ( file_exists(get_stylesheet_directory() . '/archive-' . $post_type . '.php' ) ) {
             return get_stylesheet_directory() . '/archive-' . $post_type . '.php';
         } else {
             return dirname( __FILE__ ) . '/views/archive-' . $post_type . '.php';

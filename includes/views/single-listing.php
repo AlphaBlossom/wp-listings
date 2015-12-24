@@ -113,56 +113,56 @@ function single_listing_post_content() {
 
 			<div id="listing-details">
 				<?php
-					$details_instance = new WP_Listings();
+				$details_instance = new WP_Listings();
 
-					$pattern = '<tr class="wp_listings%s"><td class="label">%s</td><td>%s</td></tr>';
+				$pattern = '<tr class="wp_listings%s"><td class="label">%s</td><td>%s</td></tr>';
 
-					echo '<table class="listing-details">';
+				echo '<table class="listing-details">';
 
-                    echo '<tbody class="left">';
-                    if ( get_post_meta($post->ID, '_listing_hide_price', true) == 1 ) {
-                    	echo (get_post_meta($post->ID, '_listing_price_alt', true)) ? '<tr class="wp_listings_listing_price"><td class="label">' . __('Price:', 'wp_listings') . '</td><td>'.get_post_meta( $post->ID, '_listing_price_alt', true) .'</td></tr>' : '';
-                	} else {
-                    	echo (get_post_meta($post->ID, '_listing_price', true)) ? '<tr class="wp_listings_listing_price"><td class="label">' . __('Price:', 'wp_listings') . '</td><td>'.get_post_meta( $post->ID, '_listing_price', true) .'</td></tr>' : '';
-                	}
-                    echo '<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">';
-                    echo (get_post_meta($post->ID, '_listing_address', true)) ? '<tr class="wp_listings_listing_address"><td class="label">' . __('Address:', 'wp_listings') . '</td><td itemprop="streetAddress">'.get_post_meta( $post->ID, '_listing_address', true) .'</td></tr>' : '';
-                    echo (get_post_meta($post->ID, '_listing_city', true)) ? '<tr class="wp_listings_listing_city"><td class="label">' . __('City:', 'wp_listings') . '</td><td itemprop="addressLocality">'.get_post_meta( $post->ID, '_listing_city', true) .'</td></tr>' : '';
-                    echo (get_post_meta($post->ID, '_listing_state', true)) ? '<tr class="wp_listings_listing_state"><td class="label">' . __('State:', 'wp_listings') . '</td><td itemprop="addressRegion">'.get_post_meta( $post->ID, '_listing_state', true) .'</td></tr>' : '';
-                    echo (get_post_meta($post->ID, '_listing_zip', true)) ? '<tr class="wp_listings_listing_zip"><td class="label">' . __('Zip Code:', 'wp_listings') . '</td><td itemprop="postalCode">'.get_post_meta( $post->ID, '_listing_zip', true) .'</td></tr>' : '';
-                    echo '</div>';
-                    echo (get_post_meta($post->ID, '_listing_mls', true)) ? '<tr class="wp_listings_listing_mls"><td class="label">MLS:</td><td>'.get_post_meta( $post->ID, '_listing_mls', true) .'</td></tr>' : '';
-                    echo '</tbody>';
+				echo '<tbody class="left">';
+				if ( get_post_meta($post->ID, '_listing_hide_price', true) == 1 ) {
+				    echo (get_post_meta($post->ID, '_listing_price_alt', true)) ? '<tr class="wp_listings_listing_price"><td class="label">' . __('Price:', 'wp_listings') . '</td><td>'.get_post_meta( $post->ID, '_listing_price_alt', true) .'</td></tr>' : '';
+				} else {
+				    echo (get_post_meta($post->ID, '_listing_price', true)) ? '<tr class="wp_listings_listing_price"><td class="label">' . __('Price:', 'wp_listings') . '</td><td>'.get_post_meta( $post->ID, '_listing_price', true) .'</td></tr>' : '';
+				}
+				echo '<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">';
+				echo (get_post_meta($post->ID, '_listing_address', true)) ? '<tr class="wp_listings_listing_address"><td class="label">' . __('Address:', 'wp_listings') . '</td><td itemprop="streetAddress">'.get_post_meta( $post->ID, '_listing_address', true) .'</td></tr>' : '';
+				echo (get_post_meta($post->ID, '_listing_city', true)) ? '<tr class="wp_listings_listing_city"><td class="label">' . __('City:', 'wp_listings') . '</td><td itemprop="addressLocality">'.get_post_meta( $post->ID, '_listing_city', true) .'</td></tr>' : '';
+				echo (get_post_meta($post->ID, '_listing_state', true)) ? '<tr class="wp_listings_listing_state"><td class="label">' . __('State:', 'wp_listings') . '</td><td itemprop="addressRegion">'.get_post_meta( $post->ID, '_listing_state', true) .'</td></tr>' : '';
+				echo (get_post_meta($post->ID, '_listing_zip', true)) ? '<tr class="wp_listings_listing_zip"><td class="label">' . __('Zip Code:', 'wp_listings') . '</td><td itemprop="postalCode">'.get_post_meta( $post->ID, '_listing_zip', true) .'</td></tr>' : '';
+				echo '</div>';
+				echo (get_post_meta($post->ID, '_listing_mls', true)) ? '<tr class="wp_listings_listing_mls"><td class="label">MLS:</td><td>'.get_post_meta( $post->ID, '_listing_mls', true) .'</td></tr>' : '';
+				echo '</tbody>';
 
-					echo '<tbody class="right">';
-					foreach ( (array) $details_instance->property_details['col2'] as $label => $key ) {
-						$detail_value = esc_html( get_post_meta($post->ID, $key, true) );
-						if (! empty( $detail_value ) ) :
-							printf( $pattern, $key, esc_html( $label ), $detail_value );
-						endif;
-					}
-					echo '</tbody>';
+				echo '<tbody class="right">';
+				foreach ( (array) $details_instance->property_details['col2'] as $label => $key ) {
+					$detail_value = esc_html( get_post_meta($post->ID, $key, true) );
+					if (! empty( $detail_value ) ) :
+						printf( $pattern, $key, esc_html( $label ), $detail_value );
+					endif;
+				}
+				echo '</tbody>';
 
-					echo '</table>';
+				echo '</table>';
 
-					echo '<table class="listing-details extended">';
-					echo '<tbody class="left">';
-					foreach ( (array) $details_instance->extended_property_details['col1'] as $label => $key ) {
-						$detail_value = esc_html( get_post_meta($post->ID, $key, true) );
-						if (! empty( $detail_value ) ) :
-							printf( $pattern, $key, esc_html( $label ), $detail_value );
-						endif;
-					}
-					echo '</tbody>';
-					echo '<tbody class="right">';
-					foreach ( (array) $details_instance->extended_property_details['col2'] as $label => $key ) {
-						$detail_value = esc_html( get_post_meta($post->ID, $key, true) );
-						if (! empty( $detail_value ) ) :
-							printf( $pattern, $key, esc_html( $label ), $detail_value );
-						endif;
-					}
-					echo '</tbody>';
-					echo '</table>';
+				echo '<table class="listing-details extended">';
+				echo '<tbody class="left">';
+				foreach ( (array) $details_instance->extended_property_details['col1'] as $label => $key ) {
+					$detail_value = esc_html( get_post_meta($post->ID, $key, true) );
+					if (! empty( $detail_value ) ) :
+						printf( $pattern, $key, esc_html( $label ), $detail_value );
+					endif;
+				}
+				echo '</tbody>';
+				echo '<tbody class="right">';
+				foreach ( (array) $details_instance->extended_property_details['col2'] as $label => $key ) {
+					$detail_value = esc_html( get_post_meta($post->ID, $key, true) );
+					if (! empty( $detail_value ) ) :
+						printf( $pattern, $key, esc_html( $label ), $detail_value );
+					endif;
+				}
+				echo '</tbody>';
+				echo '</table>';
 
 				if(get_the_term_list( get_the_ID(), 'features', '<li>', '</li><li>', '</li>' ) != null) {
 					echo '<h5>' . __('Tagged Features:', 'wp_listings') . '</h5><ul class="tagged-features">';
@@ -170,18 +170,41 @@ function single_listing_post_content() {
 					echo '</ul><!-- .tagged-features -->';
 				}
 
-				if ( get_post_meta( $post->ID, '_listing_home_sum', true) != '' || get_post_meta( $post->ID, '_listing_kitchen_sum', true) != '' || get_post_meta( $post->ID, '_listing_living_room', true) != '' || get_post_meta( $post->ID, '_listing_master_suite', true) != '') { ?>
+				$addfeat_home    = get_post_meta( $post->ID, '_listing_home_sum', true);
+				$addfeat_kitchen = get_post_meta( $post->ID, '_listing_kitchen_sum', true);
+				$addfeat_living  = get_post_meta( $post->ID, '_listing_living_room', true);
+				$addfeat_master  = get_post_meta( $post->ID, '_listing_master_suite', true);
+				
+				if ( !empty( $addfeat_home ) || !empty( $addfeat_kitchen ) || !empty( $addfeat_living ) || !empty( $addfeat_master ) ) { ?>
+				
 					<div class="additional-features">
 						<h4>Additional Features</h4>
-						<h6 class="label"><?php _e("Home Summary", 'wp_listings'); ?></h6>
-						<p class="value"><?php echo do_shortcode(get_post_meta( $post->ID, '_listing_home_sum', true)); ?></p>
-						<h6 class="label"><?php _e("Kitchen Summary", 'wp_listings'); ?></h6>
-						<p class="value"><?php echo do_shortcode(get_post_meta( $post->ID, '_listing_kitchen_sum', true)); ?></p>
-						<h6 class="label"><?php _e("Living Room", 'wp_listings'); ?></h6>
-						<p class="value"><?php echo do_shortcode(get_post_meta( $post->ID, '_listing_living_room', true)); ?></p>
-						<h6 class="label"><?php _e("Master Suite", 'wp_listings'); ?></h6>
-						<p class="value"><?php echo do_shortcode(get_post_meta( $post->ID, '_listing_master_suite', true)); ?></p>
+						<?php if ( !empty( $addfeat_home ) ) { ?>
+							<div>
+								<h6 class="label"><?php _e( "Home Summary", 'wp_listings' ); ?></h6>
+								<p class="value"><?php echo do_shortcode( $addfeat_home); ?></p>
+							</div>
+						<?php } ?>
+						<?php if ( !empty( $addfeat_kitchen ) ) { ?>
+							<div>
+								<h6 class="label"><?php _e( "Kitchen Summary", 'wp_listings' ); ?></h6>
+								<p class="value"><?php echo do_shortcode( $addfeat_kitchen ); ?></p>
+							</div>
+						<?php } ?>
+						<?php if ( !empty( $addfeat_living ) ) { ?>
+							<div>
+								<h6 class="label"><?php _e( "Living Room", 'wp_listings' ); ?></h6>
+								<p class="value"><?php echo do_shortcode( $addfeat_living ); ?></p>
+							</div>
+						<?php } ?>
+						<?php if ( !empty( $addfeat_master ) ) { ?>
+							<div>
+								<h6 class="label"><?php _e( "Master Suite", 'wp_listings' ); ?></h6>
+								<p class="value"><?php echo do_shortcode( $addfeat_master ); ?></p>
+							</div>
+						<?php } ?>
 					</div><!-- .additional-features -->
+				
 				<?php
 				} ?>
 
